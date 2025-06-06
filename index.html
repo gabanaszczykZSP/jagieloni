@@ -16,27 +16,94 @@
     }
     .tree {
       display: flex;
+      justify-content: center;
       flex-direction: column;
       align-items: center;
-      gap: 2rem;
     }
-    .member {
-      background: white;
+    .tree ul {
+      padding-top: 20px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .tree ul::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      border-left: 2px solid #ccc;
+      height: 20px;
+    }
+    .tree li {
+      list-style-type: none;
+      margin: 0 1rem;
+      padding: 2rem 1rem 0 1rem;
+      text-align: center;
+      position: relative;
+    }
+    .tree li::before, .tree li::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      border-top: 2px solid #ccc;
+      width: 50%;
+      height: 20px;
+    }
+    .tree li::before {
+      right: 50%;
+      border-right: 2px solid #ccc;
+    }
+    .tree li::after {
+      left: 50%;
+      border-left: 2px solid #ccc;
+    }
+    .tree li:only-child::before,
+    .tree li:only-child::after {
+      display: none;
+    }
+    .tree li:only-child {
+      padding-top: 0;
+    }
+    .flip-card {
+      background-color: transparent;
+      width: 250px;
+      height: 160px;
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      padding: 1rem 2rem;
-      max-width: 500px;
-      text-align: center;
-      transition: transform 0.2s;
+      padding: 1rem;
+      background: white;
     }
-    .member:hover {
-      transform: scale(1.02);
+    .flip-card-front {
+      z-index: 2;
     }
-    .member h2 {
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+    .flip-card h2 {
+      font-size: 1.1rem;
       margin: 0.5rem 0;
     }
-    .member p {
-      font-size: 0.95rem;
+    .flip-card p {
+      font-size: 0.85rem;
       color: #333;
     }
   </style>
@@ -44,34 +111,105 @@
 <body>
   <h1>Drzewo Rodziny Jagiellonów</h1>
   <div class="tree">
-    <div class="member">
-      <h2>Władysław II Jagiełło (ok. 1351–1434)</h2>
-      <p>Wielki książę litewski, od 1386 król Polski. Zapoczątkował dynastię Jagiellonów, poślubił królową Jadwigę. Zwycięzca spod Grunwaldu.</p>
-    </div>
-    <div class="member">
-      <h2>Władysław III Warneńczyk (1424–1444)</h2>
-      <p>Syn Jagiełły i Zofii Holszańskiej. Król Polski i Węgier. Zginął w bitwie pod Warną walcząc z Turkami.</p>
-    </div>
-    <div class="member">
-      <h2>Kazimierz IV Jagiellończyk (1427–1492)</h2>
-      <p>Drugi syn Jagiełły. Król Polski i wielki książę litewski. Ojciec 13 dzieci, w tym 4 królów. Umocnił pozycję dynastii.</p>
-    </div>
-    <div class="member">
-      <h2>Jan I Olbracht (1459–1501)</h2>
-      <p>Syn Kazimierza IV. Król Polski. Znany z nieudanego wyprawy mołdawskiej i walki z magnaterią.</p>
-    </div>
-    <div class="member">
-      <h2>Alexander Jagiellończyk (1461–1506)</h2>
-      <p>Wielki książę litewski i król Polski. Bronił Litwy przed Moskwą. Miał trudności z sejmem i magnatami.</p>
-    </div>
-    <div class="member">
-      <h2>Zygmunt I Stary (1467–1548)</h2>
-      <p>Król Polski i wielki książę litewski. Reformator. Poślubił Bonę Sforzę, co związało Polskę z kulturą włoską.</p>
-    </div>
-    <div class="member">
-      <h2>Zygmunt II August (1520–1572)</h2>
-      <p>Syn Zygmunta Starego i Bony. Ostatni Jagiellon. Doprowadził do unii lubelskiej. Bezpotomny.</p>
-    </div>
+    <ul>
+      <li>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h2>Władysław II Jagiełło</h2>
+              <p>ok. 1351–1434<br>Król Polski</p>
+            </div>
+            <div class="flip-card-back">
+              <p>Założyciel dynastii Jagiellonów, zwycięzca spod Grunwaldu, poślubił królową Jadwigę.</p>
+            </div>
+          </div>
+        </div>
+        <ul>
+          <li>
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <h2>Władysław III Warneńczyk</h2>
+                  <p>1424–1444<br>Król Polski i Węgier</p>
+                </div>
+                <div class="flip-card-back">
+                  <p>Zginął w bitwie pod Warną walcząc z Turkami. Uważany za bohatera chrześcijaństwa.</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <h2>Kazimierz IV Jagiellończyk</h2>
+                  <p>1427–1492<br>Król Polski</p>
+                </div>
+                <div class="flip-card-back">
+                  <p>Ojciec 13 dzieci, umocnił pozycję Jagiellonów w Europie. Jego dzieci zasiadły na tronach.</p>
+                </div>
+              </div>
+            </div>
+            <ul>
+              <li>
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h2>Jan I Olbracht</h2>
+                      <p>1459–1501<br>Król Polski</p>
+                    </div>
+                    <div class="flip-card-back">
+                      <p>Znany z wyprawy mołdawskiej i walki z magnaterią. Nazywany „dobrym królem”.</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h2>Alexander Jagiellończyk</h2>
+                      <p>1461–1506<br>Król Polski</p>
+                    </div>
+                    <div class="flip-card-back">
+                      <p>Miał trudności z sejmem. Bronił Litwy przed Moskwą. Mąż Heleny Moskiewskiej.</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h2>Zygmunt I Stary</h2>
+                      <p>1467–1548<br>Król Polski</p>
+                    </div>
+                    <div class="flip-card-back">
+                      <p>Poślubił Bonę Sforzę, przeprowadzał reformy. Mecenas kultury renesansu.</p>
+                    </div>
+                  </div>
+                </div>
+                <ul>
+                  <li>
+                    <div class="flip-card">
+                      <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                          <h2>Zygmunt II August</h2>
+                          <p>1520–1572<br>Król Polski</p>
+                        </div>
+                        <div class="flip-card-back">
+                          <p>Ostatni Jagiellon. Doprowadził do unii lubelskiej. Był trzykrotnie żonaty.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </body>
 </html><!DOCTYPE html><html lang="pl">
@@ -92,27 +230,94 @@
     }
     .tree {
       display: flex;
+      justify-content: center;
       flex-direction: column;
       align-items: center;
-      gap: 2rem;
     }
-    .member {
-      background: white;
+    .tree ul {
+      padding-top: 20px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .tree ul::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      border-left: 2px solid #ccc;
+      height: 20px;
+    }
+    .tree li {
+      list-style-type: none;
+      margin: 0 1rem;
+      padding: 2rem 1rem 0 1rem;
+      text-align: center;
+      position: relative;
+    }
+    .tree li::before, .tree li::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      border-top: 2px solid #ccc;
+      width: 50%;
+      height: 20px;
+    }
+    .tree li::before {
+      right: 50%;
+      border-right: 2px solid #ccc;
+    }
+    .tree li::after {
+      left: 50%;
+      border-left: 2px solid #ccc;
+    }
+    .tree li:only-child::before,
+    .tree li:only-child::after {
+      display: none;
+    }
+    .tree li:only-child {
+      padding-top: 0;
+    }
+    .flip-card {
+      background-color: transparent;
+      width: 250px;
+      height: 160px;
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      padding: 1rem 2rem;
-      max-width: 500px;
-      text-align: center;
-      transition: transform 0.2s;
+      padding: 1rem;
+      background: white;
     }
-    .member:hover {
-      transform: scale(1.02);
+    .flip-card-front {
+      z-index: 2;
     }
-    .member h2 {
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+    .flip-card h2 {
+      font-size: 1.1rem;
       margin: 0.5rem 0;
     }
-    .member p {
-      font-size: 0.95rem;
+    .flip-card p {
+      font-size: 0.85rem;
       color: #333;
     }
   </style>
@@ -120,34 +325,105 @@
 <body>
   <h1>Drzewo Rodziny Jagiellonów</h1>
   <div class="tree">
-    <div class="member">
-      <h2>Władysław II Jagiełło (ok. 1351–1434)</h2>
-      <p>Wielki książę litewski, od 1386 król Polski. Zapoczątkował dynastię Jagiellonów, poślubił królową Jadwigę. Zwycięzca spod Grunwaldu.</p>
-    </div>
-    <div class="member">
-      <h2>Władysław III Warneńczyk (1424–1444)</h2>
-      <p>Syn Jagiełły i Zofii Holszańskiej. Król Polski i Węgier. Zginął w bitwie pod Warną walcząc z Turkami.</p>
-    </div>
-    <div class="member">
-      <h2>Kazimierz IV Jagiellończyk (1427–1492)</h2>
-      <p>Drugi syn Jagiełły. Król Polski i wielki książę litewski. Ojciec 13 dzieci, w tym 4 królów. Umocnił pozycję dynastii.</p>
-    </div>
-    <div class="member">
-      <h2>Jan I Olbracht (1459–1501)</h2>
-      <p>Syn Kazimierza IV. Król Polski. Znany z nieudanego wyprawy mołdawskiej i walki z magnaterią.</p>
-    </div>
-    <div class="member">
-      <h2>Alexander Jagiellończyk (1461–1506)</h2>
-      <p>Wielki książę litewski i król Polski. Bronił Litwy przed Moskwą. Miał trudności z sejmem i magnatami.</p>
-    </div>
-    <div class="member">
-      <h2>Zygmunt I Stary (1467–1548)</h2>
-      <p>Król Polski i wielki książę litewski. Reformator. Poślubił Bonę Sforzę, co związało Polskę z kulturą włoską.</p>
-    </div>
-    <div class="member">
-      <h2>Zygmunt II August (1520–1572)</h2>
-      <p>Syn Zygmunta Starego i Bony. Ostatni Jagiellon. Doprowadził do unii lubelskiej. Bezpotomny.</p>
-    </div>
+    <ul>
+      <li>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h2>Władysław II Jagiełło</h2>
+              <p>ok. 1351–1434<br>Król Polski</p>
+            </div>
+            <div class="flip-card-back">
+              <p>Założyciel dynastii Jagiellonów, zwycięzca spod Grunwaldu, poślubił królową Jadwigę.</p>
+            </div>
+          </div>
+        </div>
+        <ul>
+          <li>
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <h2>Władysław III Warneńczyk</h2>
+                  <p>1424–1444<br>Król Polski i Węgier</p>
+                </div>
+                <div class="flip-card-back">
+                  <p>Zginął w bitwie pod Warną walcząc z Turkami. Uważany za bohatera chrześcijaństwa.</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <h2>Kazimierz IV Jagiellończyk</h2>
+                  <p>1427–1492<br>Król Polski</p>
+                </div>
+                <div class="flip-card-back">
+                  <p>Ojciec 13 dzieci, umocnił pozycję Jagiellonów w Europie. Jego dzieci zasiadły na tronach.</p>
+                </div>
+              </div>
+            </div>
+            <ul>
+              <li>
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h2>Jan I Olbracht</h2>
+                      <p>1459–1501<br>Król Polski</p>
+                    </div>
+                    <div class="flip-card-back">
+                      <p>Znany z wyprawy mołdawskiej i walki z magnaterią. Nazywany „dobrym królem”.</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h2>Alexander Jagiellończyk</h2>
+                      <p>1461–1506<br>Król Polski</p>
+                    </div>
+                    <div class="flip-card-back">
+                      <p>Miał trudności z sejmem. Bronił Litwy przed Moskwą. Mąż Heleny Moskiewskiej.</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <h2>Zygmunt I Stary</h2>
+                      <p>1467–1548<br>Król Polski</p>
+                    </div>
+                    <div class="flip-card-back">
+                      <p>Poślubił Bonę Sforzę, przeprowadzał reformy. Mecenas kultury renesansu.</p>
+                    </div>
+                  </div>
+                </div>
+                <ul>
+                  <li>
+                    <div class="flip-card">
+                      <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                          <h2>Zygmunt II August</h2>
+                          <p>1520–1572<br>Król Polski</p>
+                        </div>
+                        <div class="flip-card-back">
+                          <p>Ostatni Jagiellon. Doprowadził do unii lubelskiej. Był trzykrotnie żonaty.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </body>
 </html>
